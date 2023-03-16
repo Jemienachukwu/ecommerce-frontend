@@ -1,0 +1,109 @@
+main {
+  min-height: 80vh;
+}
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 1.8rem;
+  padding: 1rem 0;
+}
+h2 {
+  font-size: 1.4rem;
+  padding: 0.5rem 0;
+}
+h3 {
+  padding: 1rem 0;
+}
+.rating span {
+  margin: 0.1rem;
+}
+.categoryHeader {
+  color: #fff;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 6px;
+  height: 100px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  transition: 0.5s;
+  outline: calc(100px / 2) solid #0009;
+  outline-offset: calc(100px / -2);
+}
+
+.categoryHeader:hover {
+  color: #000;
+  outline: 1px solid #0009;
+  outline-offset: 3px;
+}
+.paystack {
+  cursor: pointer;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  background-color: #212e52;
+  font-weight: bold;
+  color: #e0eafc;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  height: 45px;
+}
+
+/* carousel */
+.carousel-item-next,
+.carousel-item-prev,
+.carousel-item-active {
+  display: flex;
+}
+.carousel-caption {
+  position: absolute;
+  top: 0;
+}
+.carousel-caption h2 {
+  color: #fff;
+}
+
+.carousel img {
+  display: flex;
+  justify-content: center;
+  height: 300px;
+  padding: 30px;
+  margin: 40px auto;
+  border-radius: 50%;
+}
+
+.carousel a {
+  margin: 0 auto;
+}
+.productCard {
+  margin: 20px 0;
+  border-radius: 6px;
+}
+.productCardImg {
+  height: 270px;
+}
+@media (max-width: 700px) {
+  .carousel img {
+    height: 280px;
+  }
+  .carousel-caption h2 {
+    font-size: x-small;
+  }
+  .productCard {
+    height: 220px;
+  }
+  .productCardImg {
+    height: 100px;
+  }
+  .cardText {
+    font-size: 8px;
+    display: inline-block;
+  }
+}
