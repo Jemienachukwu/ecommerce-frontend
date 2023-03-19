@@ -39,7 +39,7 @@ const HomeScreen = () => {
           </div>
         )}
         {products
-          .filter((product) => product.category === category)
+          ?.filter((product) => product.category === category)
           .map((product) => (
             <Col xs={6} sm={12} md={6} lg={4} xl={3} key={product._id}>
               <Product product={product} />
