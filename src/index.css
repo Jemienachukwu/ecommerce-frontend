@@ -28,18 +28,34 @@ h3 {
   justify-content: center;
   display: flex;
   align-items: center;
-  cursor: pointer;
   background-size: cover;
   background-position: center;
   transition: 0.5s;
   outline: calc(100px / 2) solid #0009;
   outline-offset: calc(100px / -2);
 }
-
+.categoryHeader .link {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .categoryHeader:hover {
   color: #000;
   outline: 1px solid #0009;
   outline-offset: 3px;
+}
+.categoryHeader span {
+  background-color: transparent;
+  cursor: pointer;
+  color: #fff;
+  border-radius: 5px;
+  padding: 5px;
+}
+.categoryHeader:hover span {
+  background-color: #fff;
+  color: #000;
 }
 .paystack {
   cursor: pointer;

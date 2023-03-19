@@ -15,7 +15,7 @@ const Header = () => {
     dispatch(logout());
     navigate("/");
   }
-
+  const { cartItems } = useSelector((state) => state.cart);
   return (
     <header>
       <Navbar
@@ -24,7 +24,6 @@ const Header = () => {
         variant="dark"
         collapseOnSelect
         className="p-4"
-        // variant="light"
       >
         <>
           <LinkContainer to="/" className="my-2">
@@ -37,7 +36,9 @@ const Header = () => {
             <Nav className="ms-auto">
               <LinkContainer to="/cart">
                 <Nav.Link>
-                  <i className="fas fa-shopping-cart"></i>Cart
+                  <i className="fas fa-shopping-cart"></i>{" "}
+                  {cartItems.length >= 1 &&
+                    cartItems.reduce((acc, item) => acc + item.qty, 0)}
                 </Nav.Link>
               </LinkContainer>
               {userInfo ? (
