@@ -15,3 +15,4 @@ root.render(
 );
 
 reportWebVitals();
+// "proxy": "https://techstore-api-fdnu.onrender.com/",
