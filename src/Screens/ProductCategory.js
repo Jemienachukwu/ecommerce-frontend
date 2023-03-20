@@ -10,7 +10,6 @@ import Product from "../component/Product";
 
 const ProductCategory = () => {
   let { id } = useParams();
-  console.log(id);
   const { loading, error, products, page, pages } = useSelector(
     (state) => state.productList
   );
@@ -20,8 +19,7 @@ const ProductCategory = () => {
   useEffect(() => {
     dispatch(listProducts("", 1));
   }, [dispatch]);
-  console.log(products);
-  console.log(products.filter((product) => product.category === id));
+
   return (
     <div>
       {error ? (

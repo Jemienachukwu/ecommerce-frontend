@@ -32,7 +32,7 @@ const ProductCarousel = () => {
         backgroundSize: "100% 100%",
       }}
     >
-      {products?.map((product) => (
+      {products.map((product) => (
         <Carousel.Item key={product._id}>
           <Link to={`/product/${product._id}`}>
             <Image src={product.image} alt={product.name} fluid />
