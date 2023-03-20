@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-  "proxy": "https://techstore-api-fdnu.onrender.com",
+  "proxy": "https://techstore-api-fdnu.onrender.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
