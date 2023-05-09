@@ -18,16 +18,10 @@ const Header = () => {
   const { cartItems } = useSelector((state) => state.cart);
   return (
     <header>
-      <Navbar
-        expand="lg"
-        bg="dark"
-        variant="dark"
-        collapseOnSelect
-        className="p-4"
-      >
+      <Navbar expand="lg" className="shadow-sm p-3" collapseOnSelect>
         <>
           <LinkContainer to="/" className="my-2">
-            <Navbar.Brand>Online Store</Navbar.Brand>
+            <Navbar.Brand> store</Navbar.Brand>
           </LinkContainer>
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -35,10 +29,15 @@ const Header = () => {
             <SearchBar navigate={navigate} />
             <Nav className="ms-auto">
               <LinkContainer to="/cart">
-                <Nav.Link>
-                  <i className="fas fa-shopping-cart"></i>{" "}
-                  {cartItems.length >= 1 &&
-                    cartItems.reduce((acc, item) => acc + item.qty, 0)}
+                <Nav.Link className="nav-link active bg-dark rounded px-2">
+                  <i
+                    className="fa-solid fa-bag-shopping"
+                    style={{ color: "#fff" }}
+                  ></i>{" "}
+                  <span style={{ color: "#fff" }}>
+                    {cartItems.length >= 1 &&
+                      cartItems.reduce((acc, item) => acc + item.qty, 0)}
+                  </span>
                 </Nav.Link>
               </LinkContainer>
               {userInfo ? (

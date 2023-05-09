@@ -44,16 +44,20 @@ const ProductCategoryHeader = () => {
         }}
       >
         <Link to={item.link} className="link">
-          <span>{item.itemName}</span>
+          {/* <span></span> */}
+          {item.itemName}
         </Link>
       </Col>
     );
   };
+
   return (
     <Container fluid>
       <Row className="mb-3">
         {displayItems.map((item, i) => (
+          // <Col>
           <MappedElement item={item} key={i} />
+          // </Col>
         ))}
       </Row>
     </Container>

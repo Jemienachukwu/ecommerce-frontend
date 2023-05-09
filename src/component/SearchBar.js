@@ -13,17 +13,22 @@ const SearchBar = ({ navigate }) => {
     }
   };
   return (
-    <Form onSubmit={submitHandler} className="d-flex ">
+    <Form
+      onSubmit={submitHandler}
+      className="d-flex justify-content-center"
+      style={{ width: "60%" }}
+    >
       <Form.Control
         type="text"
         name="q"
         onChange={(e) => setKeyword(e.target.value)}
         placeholder="search products..."
-        className="mr-sm-2 ml-sm-5 "
+        className="mr-sm-2 ml-sm-5"
+        style={{ width: "100%" }}
       ></Form.Control>
 
       <Button type="submit" variant="outline-success" className="p-2">
-        Search
+        <i className="fa-sharp fa-solid fa-magnifying-glass"></i>
       </Button>
     </Form>
   );
