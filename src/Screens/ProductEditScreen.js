@@ -65,7 +65,11 @@ const ProductEditScreen = () => {
           "Content-Type": "multipart/form-data",
         },
       };
-      const { data } = await axios.post("/api/upload", formData, config);
+      const { data } = await axios.post(
+        "https://techstore-api-fdnu.onrender.com/api/upload",
+        formData,
+        config
+      );
       setImage(data);
       setUploading(false);
     } catch (error) {

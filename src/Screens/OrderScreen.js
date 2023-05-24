@@ -76,7 +76,11 @@ const OrderScreen = () => {
       };
       if (res.status === "success") {
         axios
-          .post("/api/orders/updatePastack", body, config)
+          .post(
+            "https://techstore-api-fdnu.onrender.com/api/orders/updatePastack",
+            body,
+            config
+          )
 
           .catch((err) => {
             setErr(!err);
