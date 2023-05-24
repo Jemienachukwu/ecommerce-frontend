@@ -29,17 +29,18 @@ const Header = () => {
             <SearchBar navigate={navigate} />
             <Nav className="ms-auto">
               <LinkContainer to="/cart">
-                <Nav.Link className="nav-link active bg-dark rounded px-2">
+                <Nav.Link className=" px-2">
                   <i
                     className="fa-solid fa-bag-shopping"
-                    style={{ color: "#fff" }}
-                  ></i>{" "}
-                  <span style={{ color: "#fff" }}>
+                    style={{ color: "#000" }}
+                  ></i>
+                  <span style={{ color: "#000", marginLeft: "5px" }}>
                     {cartItems.length >= 1 &&
                       cartItems.reduce((acc, item) => acc + item.qty, 0)}
                   </span>
                 </Nav.Link>
               </LinkContainer>
+
               {userInfo ? (
                 <NavDropdown title={userInfo.name} id="username">
                   <LinkContainer to="/profile">

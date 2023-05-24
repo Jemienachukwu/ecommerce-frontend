@@ -38,6 +38,7 @@ const HomeScreen = () => {
             </Link>
           </div>
         )}
+
         {products
           ?.filter((product) => product.category === category)
           .map((product) => (

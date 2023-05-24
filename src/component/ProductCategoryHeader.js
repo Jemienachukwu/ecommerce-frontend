@@ -44,7 +44,6 @@ const ProductCategoryHeader = () => {
         }}
       >
         <Link to={item.link} className="link">
-          {/* <span></span> */}
           {item.itemName}
         </Link>
       </Col>
@@ -52,15 +51,11 @@ const ProductCategoryHeader = () => {
   };
 
   return (
-    <Container fluid>
-      <Row className="mb-3">
-        {displayItems.map((item, i) => (
-          // <Col>
-          <MappedElement item={item} key={i} />
-          // </Col>
-        ))}
-      </Row>
-    </Container>
+    <Row className="mb-3">
+      {displayItems.map((item, i) => (
+        <MappedElement item={item} key={i} />
+      ))}
+    </Row>
   );
 };
 

@@ -13,11 +13,7 @@ const SearchBar = ({ navigate }) => {
     }
   };
   return (
-    <Form
-      onSubmit={submitHandler}
-      className="d-flex justify-content-center"
-      style={{ width: "60%" }}
-    >
+    <Form onSubmit={submitHandler} className="d-flex justify-content-center">
       <Form.Control
         type="text"
         name="q"
