@@ -19,7 +19,16 @@ import {
   ORDER_DELIVER_FAIL,
 } from "../constants/orderConstants";
 import axios from "axios";
-
+const corsConfig = {
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers":
+      "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+    "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+  },
+};
+const API_BASE_URL = "https://techstore-api-fdnu.onrender.com/api/orders";
 export const createOrder = (order) => async (dispatch, getState) => {
   try {
     dispatch({
@@ -31,17 +40,15 @@ export const createOrder = (order) => async (dispatch, getState) => {
     } = getState();
 
     const config = {
+      ...corsConfig,
       headers: {
+        ...corsConfig.headers,
         "Content-Type": "application/json",
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
 
-    const { data } = await axios.post(
-      `https://techstore-api-fdnu.onrender.com/api/orders`,
-      order,
-      config
-    );
+    const { data } = await axios.post(`${API_BASE_URL}`, order, config);
 
     dispatch({
       type: ORDER_CREATE_SUCCESS,
@@ -69,15 +76,14 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     } = getState();
 
     const config = {
+      ...corsConfig,
       headers: {
+        ...corsConfig.headers,
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
 
-    const { data } = await axios.get(
-      `https://techstore-api-fdnu.onrender.com/api/orders/${id}`,
-      config
-    );
+    const { data } = await axios.get(`${API_BASE_URL}/${id}`, config);
     dispatch({
       type: ORDER_DETAILS_SUCCESS,
       payload: data,
@@ -105,14 +111,16 @@ export const payOrder =
       } = getState();
 
       const config = {
+        ...corsConfig,
         headers: {
+          ...corsConfig.headers,
           "Content-Type": "application/json",
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
 
       const { data } = await axios.put(
-        `https://techstore-api-fdnu.onrender.com/api/orders/${orderId}/pay`,
+        `${API_BASE_URL}/${orderId}/pay`,
         paymentResult,
         config
       );
@@ -143,13 +151,15 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
     } = getState();
 
     const config = {
+      ...corsConfig,
       headers: {
+        ...corsConfig.headers,
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
 
     const { data } = await axios.put(
-      `https://techstore-api-fdnu.onrender.com/api/orders/${order._id}/deliver`,
+      `${API_BASE_URL}/${order._id}/deliver`,
       {},
       config
     );
@@ -180,15 +190,14 @@ export const orderMyList = () => async (dispatch, getState) => {
     } = getState();
 
     const config = {
+      ...corsConfig,
       headers: {
+        ...corsConfig.headers,
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
 
-    const { data } = await axios.get(
-      `https://techstore-api-fdnu.onrender.com/api/orders/myorders`,
-      config
-    );
+    const { data } = await axios.get(`${API_BASE_URL}/myorders`, config);
     dispatch({
       type: ORDER_MY_LIST_SUCCESS,
       payload: data,
@@ -215,15 +224,14 @@ export const listOrder = () => async (dispatch, getState) => {
     } = getState();
 
     const config = {
+      ...corsConfig,
       headers: {
+        ...corsConfig.headers,
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
 
-    const { data } = await axios.get(
-      `https://techstore-api-fdnu.onrender.com/api/orders`,
-      config
-    );
+    const { data } = await axios.get(`${API_BASE_URL}`, config);
     dispatch({
       type: ORDER_LIST_SUCCESS,
       payload: data,

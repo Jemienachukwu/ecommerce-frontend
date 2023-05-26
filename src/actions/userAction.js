@@ -27,6 +27,16 @@ import {
 
 import axios from "axios";
 import { ORDER_MY_LIST_RESET } from "../constants/orderConstants";
+const corsConfig = {
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers":
+      "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+    "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+  },
+};
+const API_BASE_URL = "https://techstore-api-fdnu.onrender.com/api/users";
 
 export const logIn = (email, password) => async (dispatch) => {
   try {
@@ -35,12 +45,14 @@ export const logIn = (email, password) => async (dispatch) => {
     });
 
     const config = {
+      ...corsConfig,
       headers: {
+        ...corsConfig.headers,
         "content-Type": "application/json",
       },
     };
     const { data } = await axios.post(
-      "https://techstore-api-fdnu.onrender.com/api/users/login",
+      `${API_BASE_URL}/login`,
       { email, password },
       config
     );
@@ -75,12 +87,14 @@ export const register = (name, email, password) => async (dispatch) => {
     });
 
     const config = {
+      ...corsConfig,
       headers: {
+        ...corsConfig.headers,
         "content-Type": "application/json",
       },
     };
     const { data } = await axios.post(
-      "https://techstore-api-fdnu.onrender.com/api/users",
+      `${API_BASE_URL}`,
       { name, email, password },
       config
     );
@@ -114,15 +128,14 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     } = getState();
 
     const config = {
+      ...corsConfig,
       headers: {
+        ...corsConfig.headers,
         "content-Type": "application/json",
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get(
-      `https://techstore-api-fdnu.onrender.com/api/users/${id}`,
-      config
-    );
+    const { data } = await axios.get(`${API_BASE_URL}/${id}`, config);
     dispatch({
       type: USER_DETAILS_SUCCESS,
       payload: data,
@@ -148,16 +161,14 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     } = getState();
 
     const config = {
+      ...corsConfig,
       headers: {
+        ...corsConfig.headers,
         "content-Type": "application/json",
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.put(
-      `https://techstore-api-fdnu.onrender.com/api/users/profile`,
-      user,
-      config
-    );
+    const { data } = await axios.put(`${API_BASE_URL}/profile`, user, config);
     dispatch({
       type: USER_UPDATE_PROFILE_SUCCESS,
       payload: data,
@@ -183,14 +194,13 @@ export const listUsers = () => async (dispatch, getState) => {
     } = getState();
 
     const config = {
+      ...corsConfig,
       headers: {
+        ...corsConfig.headers,
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get(
-      `https://techstore-api-fdnu.onrender.com/api/users`,
-      config
-    );
+    const { data } = await axios.get(`${API_BASE_URL}`, config);
     dispatch({
       type: USER_LIST_SUCCESS,
       payload: data,
@@ -216,14 +226,13 @@ export const deleteUser = (id) => async (dispatch, getState) => {
     } = getState();
 
     const config = {
+      ...corsConfig,
       headers: {
+        ...corsConfig.headers,
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    await axios.delete(
-      `https://techstore-api-fdnu.onrender.com/api/users/${id}`,
-      config
-    );
+    await axios.delete(`${API_BASE_URL}/${id}`, config);
     dispatch({
       type: USER_DELETE_SUCCESS,
     });
@@ -248,13 +257,15 @@ export const updateUser = (user) => async (dispatch, getState) => {
     } = getState();
 
     const config = {
+      ...corsConfig,
       headers: {
+        ...corsConfig.headers,
         "Content-Type": "application/json",
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
     const { data } = await axios.put(
-      `https://techstore-api-fdnu.onrender.com/api/users/${user._id}`,
+      `${API_BASE_URL}/${user._id}`,
       user,
       config
     );

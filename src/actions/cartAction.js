@@ -8,7 +8,16 @@ import {
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
   const { data } = await axios.get(
-    `https://techstore-api-fdnu.onrender.com/api/products/${id}`
+    `https://techstore-api-fdnu.onrender.com/api/products/${id}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers":
+          "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+        "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+      },
+    }
   );
   dispatch({
     type: CART_ADD_ITEM,

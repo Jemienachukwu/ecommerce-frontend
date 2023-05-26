@@ -6,12 +6,12 @@ import {
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
   PRODUCT_DETAILS_FAIL,
+  PRODUCT_DELETE_REQUEST,
   PRODUCT_DELETE_SUCCESS,
   PRODUCT_DELETE_FAIL,
-  PRODUCT_DELETE_REQUEST,
+  PRODUCT_UPDATE_REQUEST,
   PRODUCT_UPDATE_SUCCESS,
   PRODUCT_UPDATE_FAIL,
-  PRODUCT_UPDATE_REQUEST,
   PRODUCT_CREATE_REQUEST,
   PRODUCT_CREATE_SUCCESS,
   PRODUCT_CREATE_FAIL,
@@ -23,13 +23,25 @@ import {
   PRODUCT_TOP_FAIL,
 } from "../constants/productsConstants";
 
+const API_BASE_URL = "https://techstore-api-fdnu.onrender.com/api/products";
+const corsConfig = {
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers":
+      "Origin, X-Requested-With, Content-Type, Accept, Z-Key",
+    "Access-Control-Allow-Methods": "GET, HEAD, POST, PUT, DELETE, OPTIONS",
+  },
+};
+
 export const listProducts =
   (keyword = "", pageNumber = "") =>
   async (dispatch) => {
     try {
       dispatch({ type: PRODUCT_LIST_REQUEST });
       const { data } = await axios.get(
-        `https://techstore-api-fdnu.onrender.com/api/products?keyword=${keyword}&pageNumber=${pageNumber}`
+        `${API_BASE_URL}?keyword=${keyword}&pageNumber=${pageNumber}`,
+        corsConfig
       );
 
       dispatch({
@@ -50,9 +62,7 @@ export const listProducts =
 export const listProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
-    const { data } = await axios.get(
-      `https://techstore-api-fdnu.onrender.com/api/products/${id}`
-    );
+    const { data } = await axios.get(`${API_BASE_URL}/${id}`, corsConfig);
 
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,
@@ -71,28 +81,23 @@ export const listProductDetails = (id) => async (dispatch) => {
 
 export const deleteProduct = (id) => async (dispatch, getState) => {
   try {
-    dispatch({
-      type: PRODUCT_DELETE_REQUEST,
-    });
+    dispatch({ type: PRODUCT_DELETE_REQUEST });
 
     const {
       userLogin: { userInfo },
     } = getState();
 
     const config = {
+      ...corsConfig,
       headers: {
+        ...corsConfig.headers,
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
 
-    await axios.delete(
-      `https://techstore-api-fdnu.onrender.com/api/products/${id}`,
-      config
-    );
+    await axios.delete(`${API_BASE_URL}/${id}`, config);
 
-    dispatch({
-      type: PRODUCT_DELETE_SUCCESS,
-    });
+    dispatch({ type: PRODUCT_DELETE_SUCCESS });
   } catch (error) {
     dispatch({
       type: PRODUCT_DELETE_FAIL,
@@ -106,25 +111,21 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
 
 export const createProduct = () => async (dispatch, getState) => {
   try {
-    dispatch({
-      type: PRODUCT_CREATE_REQUEST,
-    });
+    dispatch({ type: PRODUCT_CREATE_REQUEST });
 
     const {
       userLogin: { userInfo },
     } = getState();
 
     const config = {
+      ...corsConfig,
       headers: {
+        ...corsConfig.headers,
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
 
-    const { data } = await axios.post(
-      `https://techstore-api-fdnu.onrender.com/api/products`,
-      {},
-      config
-    );
+    const { data } = await axios.post(`${API_BASE_URL}`, {}, config);
 
     dispatch({
       type: PRODUCT_CREATE_SUCCESS,
@@ -152,14 +153,15 @@ export const updateProduct = (product) => async (dispatch, getState) => {
     } = getState();
 
     const config = {
+      ...corsConfig,
       headers: {
-        "Content-Type": "application/json",
+        ...corsConfig.headers,
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
 
     const { data } = await axios.put(
-      `https://techstore-api-fdnu.onrender.com/api/products/${product._id}`,
+      `${API_BASE_URL}/${product._id}`,
       product,
       config
     );
@@ -179,7 +181,6 @@ export const updateProduct = (product) => async (dispatch, getState) => {
   }
 };
 
-// create reviews
 export const reviewProduct =
   (productId, review) => async (dispatch, getState) => {
     try {
@@ -192,17 +193,14 @@ export const reviewProduct =
       } = getState();
 
       const config = {
+        ...corsConfig,
         headers: {
-          "Content-Type": "application/json",
+          ...corsConfig.headers,
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
 
-      await axios.post(
-        `https://techstore-api-fdnu.onrender.com/api/products/${productId}/reviews`,
-        review,
-        config
-      );
+      await axios.post(`${API_BASE_URL}/${productId}/reviews`, review, config);
 
       dispatch({
         type: PRODUCT_CREATE_REVIEW_SUCCESS,
@@ -221,9 +219,8 @@ export const reviewProduct =
 export const listTopProducts = () => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_TOP_REQUEST });
-    const { data } = await axios.get(
-      "https://techstore-api-fdnu.onrender.com/api/products/top"
-    );
+    const { data } = await axios.get(`${API_BASE_URL}/top`, corsConfig);
+
     dispatch({
       type: PRODUCT_TOP_SUCCESS,
       payload: data,
