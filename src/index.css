@@ -112,6 +112,9 @@ h3 {
   h3 {
     padding: 0;
   }
+  .categoryHeader {
+    display: none;
+  }
   .carousel img {
     height: 280px;
   }
